@@ -50,7 +50,6 @@ const schemaInfo = {
 };
 
 // Create init users.
-
 const im = {
   _id: "57231f1a30e4351f4e9f4bd7",
   first_name: "Ian",
@@ -205,7 +204,6 @@ const comment1 = {
   user: jo,
   photo_id: photo1._id,
 };
-
 const comment2 = {
   _id: "57231f1a30e4351f4e9f4bea",
   date_time: "2013-09-06 14:02:00",
@@ -216,7 +214,6 @@ const comment2 = {
   user: jo,
   photo_id: photo1._id,
 };
-
 const comment3 = {
   _id: "57231f1a30e4351f4e9f4beb",
   date_time: "2013-09-08 14:06:00",
@@ -226,7 +223,6 @@ const comment3 = {
   user: jo,
   photo_id: photo1._id,
 };
-
 const comment4 = {
   _id: "57231f1a30e4351f4e9f4bec",
   date_time: "2009-09-14 18:07:00",
@@ -239,7 +235,6 @@ const comment4 = {
   user: im,
   photo_id: photo2._id,
 };
-
 const comment5 = {
   _id: "57231f1a30e4351f4e9f4bed",
   date_time: "2013-11-28 17:45:13",
@@ -248,7 +243,6 @@ const comment5 = {
   user: er,
   photo_id: photo5._id,
 };
-
 const comment6 = {
   _id: "57231f1a30e4351f4e9f4bee",
   date_time: "2013-11-02 14:07:00",
@@ -258,7 +252,6 @@ const comment6 = {
   user: er,
   photo_id: photo7._id,
 };
-
 const comment7 = {
   _id: "57231f1a30e4351f4e9f4bef",
   date_time: "2013-11-02 14:09:15",
@@ -268,7 +261,6 @@ const comment7 = {
   user: rk,
   photo_id: photo7._id,
 };
-
 const comment8 = {
   _id: "57231f1a30e4351f4e9f4bf0",
   date_time: "2010-09-06 13:59:33",
@@ -276,7 +268,6 @@ const comment8 = {
   user: rk,
   photo_id: photo8._id,
 };
-
 const comment9 = {
   _id: "57231f1a30e4351f4e9f4bf1",
   date_time: "2008-10-16 18:04:55",
@@ -287,7 +278,6 @@ const comment9 = {
   user: rk,
   photo_id: photo12._id,
 };
-
 const comment10 = {
   _id: "57231f1a30e4351f4e9f4bf2",
   date_time: "2013-12-04 13:12:00",
@@ -295,7 +285,6 @@ const comment10 = {
   user: pt,
   photo_id: photo10._id,
 };
-
 const comment11 = {
   _id: "57231f1a30e4351f4e9f4bf3",
   date_time: "2013-09-04 10:14:32",
@@ -305,7 +294,6 @@ const comment11 = {
   user: al,
   photo_id: photo11._id,
 };
-
 const comment12 = {
   _id: "57231f1a30e4351f4e9f4bf4",
   date_time: "2016-01-04 2:00:01",
@@ -313,7 +301,6 @@ const comment12 = {
   user: al,
   photo_id: photo9._id,
 };
-
 const comment13 = {
   _id: "57231f1a30e4351f4e9f4bf5",
   date_time: "2016-01-04 2:04:01",
@@ -338,14 +325,20 @@ const comments = [
   comment13,
 ];
 
+// Duyệt qua tất cả các bình luận và chèn bình luận vào trong ảnh 
 comments.forEach(function (comment) {
+
+  // Lấy ảnh đầu tiên trùng khớp với comment.photo_id 
   const photo = photos.filter(function (photo) {
     return photo._id === comment.photo_id;
   })[0]; // Only one match. Return the content of the match inside the array
 
+  // Nếu ảnh chưa có bình luận thì khới tạo mảng rỗng 
   if (!photo.comments) {
     photo.comments = [];
   }
+
+  // Chèn bình luận vào ảnh 
   photo.comments.push(comment);
 });
 
