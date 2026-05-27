@@ -15,7 +15,7 @@ async function dbConnect() {
     console.log("Successfully connected to MongoDB Atlas!");
   } catch (error) {
     console.log("Unable to connect to MongoDB Atlas with default DNS. Retrying with Google DNS...");
-    console.error(error);
+    // console.error(error);
 
     useGoogleDns();
 
