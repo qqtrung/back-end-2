@@ -5,6 +5,12 @@ const router = express.Router();
 
 router.get("/list", async (req, res) => {
   try {
+
+    // Chúng ta chỉ trả về danh sách các trường 
+    // ID FIRST_NAME LAST_NAME mà thôi 
+    // Chúng ta không cần trả về tất cả vì 
+    // Trong đề bảo là số lượng người dùng nhiều nên chỉ trả về cái đó thôi 
+
     const users = await User.find({}, "_id first_name last_name");
 
     const result = await Promise.all(
@@ -42,34 +48,27 @@ router.get("/list", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
-  try {
-    const user = await User.findById(
-      req.params.id,
-      "_id first_name last_name location description occupation"
-    );
+// Trả về thông tin của người dùng đó ở tất cả các trường 
 
+router.get("/:userId", async (req, res) => {
+
+  try {
+    const userId = req.params.userId;
+    const projection = "_id first_name last_name location description occupation";
+
+    const user = await User.findById(userId, projection);
     if (!user) {
-      return res.status(400).send("User not found");
+      res.status(400).send("Invalid UserId");
+      return;
     }
 
     res.json(user);
-  } catch (err) {
-    res.status(400).send("Invalid user id");
   }
-});
 
-router.post("/", async (req, res) => {
-  try {
-    const newUser = new User(req.body);
-    await newUser.save();
-
-    res.status(201).json(newUser);
-  } catch (err) {
-    res.status(400).send("Error creating user");
+  catch {
+    res.status(400).send("Invalid UserId");
   }
-});
 
-// test xem su thay doi tren git
+})
 
 module.exports = router;

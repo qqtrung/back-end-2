@@ -3,12 +3,18 @@ const Photo = require("../db/photoModel");
 
 const router = express.Router();
 
+// Trả về danh sách các bình luận của 1 người dùng nào đó 
+// Bao gồm 
+// ID 
+// Nội dung bình luận 
+// Ngày tháng bình luận 
+// Ảnh : ID , Tên ảnh 
+
 router.get("/:userId", async (req, res) => {
   try {
+
     const userId = req.params.userId;
-
     const photos = await Photo.find({});
-
     const result = [];
 
     photos.forEach((photo) => {
